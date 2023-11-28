@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>TouchPad</title>
+  </head>
+  <style>
+    * {
+      touch-action: none;
+    }
+  </style>
+  <body>
+    <p class="position">
+      X: <span id="x"></span><br />
+      Y: <span id="y"></span>
+    </p>
+  </body>
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    document.addEventListener('touchmove', function (event) {
+        var touch = event.touches[0];
+        var touchData = { x: touch.clientX, y: touch.clientY };
+
+        document.getElementById('x').innerHTML = touch.clientX;
+        document.getElementById('y').innerHTML = touch.clientY;
+        
+        socket.emit('touch_event', touchData);
+    });
+</script>
+
+  </script>
+</html>
