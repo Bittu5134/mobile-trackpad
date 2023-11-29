@@ -1,5 +1,5 @@
-import queue
+import multiprocessing
 
-def start(Queue :queue.Queue, sensitivity):
+def start(Queue :multiprocessing.Queue, sensitivity):
     while True:
         print(Queue.get())
