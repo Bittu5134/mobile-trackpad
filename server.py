@@ -7,15 +7,15 @@ socketio = flask_socketio.SocketIO(app)
 
 @app.get("/")
 def index():
-    if OAuthCode != flask.request.args.get("code", default=None): return "Invalid OAuth Code"
+    # if OAuthCode != flask.request.args.get("code", default=None): return "Invalid OAuth Code"
     return flask.render_template("index.html")
 
 @socketio.on("touch_event")
 def touch_event(data):
-    print(data)
+    mousePos.put(data)
 
 
-def start(Code, Queue):
+def start(Code, Queue:queue.Queue):
     global OAuthCode, mousePos
     OAuthCode = Code
     mousePos = Queue
